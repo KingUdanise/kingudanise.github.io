@@ -3,7 +3,7 @@
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden; /* niente scroll */
+  overflow: hidden;        /* niente scroll */
   background: #000;
   color: #fff;
   font-family: system-ui, sans-serif;
@@ -29,17 +29,19 @@ p {
   opacity: 0.8;
 }
 
-p a {
-  color: #fff;
-  text-decoration: none;
+/* Link inline nella homepage */
+.overlay a {
+  color: inherit;           /* stesso colore del testo */
+  text-decoration: none;    /* niente sottolineatura */
+  font-weight: inherit;
 }
 
-p a:hover {
-  text-decoration: underline;
+.overlay a:hover {
+  opacity: 0.8;             /* effetto hover leggero */
+  transition: opacity 0.2s;
 }
 
-
-/* Footer invisibile */
+/* Footer invisibile (rimane per SEO) */
 .footer {
   display: none;
 }
