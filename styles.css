@@ -1,260 +1,108 @@
-﻿/* ---- Base layout ---- */
-html {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;                 /* lock horizontal scroll globally */
-  background: #000;
-  color: #fff;
-  font-family: 'Montserrat', sans-serif;
+﻿/* ---------- Base layout ---------- */
+html{
+  margin:0; padding:0; height:100%; width:100%;
+  overflow-x:hidden;                /* lock horizontal scroll globally */
+  background:#000; color:#fff;
+  font-family:'Montserrat',sans-serif;
+}
+body{
+  margin:0; padding:0; height:100%; width:100%;
+  overflow:hidden;                  /* default: no scroll */
+  background:transparent; color:inherit; font-family:inherit;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;                   /* default: no scroll (home & other pages) */
-  background: transparent;            /* html already black */
-  color: inherit;
-  font-family: inherit;
+/* Book page: allow vertical scroll */
+body.book{
+  overflow-y:auto; overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-gutter:stable both-edges;
 }
 
-/* ---- Book page: allow vertical scroll only here ---- */
-body.book {
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;  /* smooth iOS scrolling */
-  scrollbar-gutter: stable both-edges;/* avoid layout shift when scrollbar appears (supported browsers) */
+/* ---------- Fullscreen centered sections ---------- */
+.hero{
+  min-height:100svh;
+  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
+}
+.page{
+  min-height:100svh;
+  display:grid; place-items:center;
+  grid-template-rows:auto auto;   /* hero (title/strapline) + gallery strip */
+  gap:.5rem;                      /* tight vertical rhythm */
+  padding:2rem 1.25rem;
 }
 
-/* ---- Fullscreen centered sections ---- */
-/* Home */
-.hero {
-  min-height: 100svh;                 /* better mobile viewport units */
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+/* When a tiny brand link is present at the top */
+.page.has-brand{ padding-top:80px; }      /* room for brand link */
+
+/* ---------- Typography ---------- */
+h1{ margin:0; font-size:3rem; letter-spacing:1rem; font-weight:600; }
+p{ margin-top:.5rem; font-size:1rem; opacity:.8; }
+
+/* inline links (home tagline & subpages) */
+.overlay a, .page a{ color:inherit; text-decoration:none; font-weight:inherit; }
+.overlay a:hover, .page a:hover{ opacity:.8; transition:opacity .2s; }
+
+/* CTA (home) */
+.cta{ margin-top:1.75rem; }
+.btn{
+  display:inline-block; padding:.55rem 1.15rem; border:1px solid #fff; border-radius:4px;
+  color:#fff; text-decoration:none; font-weight:600; transition:all .25s ease;
 }
+.btn:hover{ background:#fff; color:#000; }
 
-/* Subpages (cinematography, reels, recaps, book, etc.) */
-.page {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem 1.25rem;              /* comfortable breathing room */
+/* Footer hidden but present for SEO */
+.footer{ display:none; }
+
+/* ---------- Tiny brand link (all subpages) ---------- */
+.top-link{
+  position:fixed; top:15px; left:50%; transform:translateX(-50%);
+  font-size:.9rem; letter-spacing:.5rem; font-weight:600; text-decoration:none;
+  color:#fff; opacity:.7; z-index:1000;
 }
+.top-link:hover{ opacity:1; transition:opacity .2s; }
 
-/* If you show a centered brand link on subpages, leave room at top */
-body.book .page { padding-top: 3.5rem; }
-
-/* ---- Typography ---- */
-h1 {
-  font-size: 3rem;
-  letter-spacing: 1rem;
-  font-weight: 600;
-  margin: 0;                          /* remove default top gap */
+/* ---------- Horizontal strip for vertical videos ---------- */
+.strip{
+  --card-w:280px; --card-h:500px;
+  margin-top:.5rem; padding:0 1.25rem;
+  display:grid; grid-auto-flow:column; grid-auto-columns:var(--card-w);
+  gap:16px; overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
 }
+.strip::-webkit-scrollbar{ height:6px; } 
+.strip::-webkit-scrollbar-thumb{ background:#333; border-radius:3px; }
+.strip::-webkit-scrollbar-track{ background:#111; }
 
-p {
-  margin-top: 0.5rem;
-  font-size: 1rem;
-  opacity: 0.8;
+/* Card */
+.card{ scroll-snap-align:start; width:var(--card-w); height:var(--card-h);
+  border:1px solid rgba(255,255,255,.1); border-radius:10px; overflow:hidden;
+  background:#0b0b0b; position:relative;
 }
-
-/* ---- Inline links (homepage tagline & general inline links) ---- */
-.overlay a,
-.page a {
-  color: inherit;
-  text-decoration: none;
-  font-weight: inherit;
+.card-btn{ all:unset; cursor:pointer; display:block; width:100%; height:100%; position:relative; }
+.thumb{ width:100%; height:100%; object-fit:cover; display:block; filter:saturate(1) contrast(1.05);
+  transition:transform .25s ease, filter .25s ease;
 }
-.overlay a:hover,
-.page a:hover {
-  opacity: 0.8;
-  transition: opacity 0.2s;
+.card-btn:hover .thumb{ transform:scale(1.02); filter:saturate(1.1) contrast(1.1); }
+.caption{ position:absolute; left:10px; bottom:10px; font-size:.85rem; opacity:.85; }
+
+/* Lightbox */
+.lightbox[hidden]{ display:none; }
+.lightbox{
+  position:fixed; inset:0; display:grid; place-items:center;
+  background:rgba(0,0,0,.85); backdrop-filter:blur(2px); z-index:9999;
 }
-
-/* ---- CTA button (homepage) ---- */
-.cta { margin-top: 1.75rem; }
-
-.btn {
-  display: inline-block;
-  padding: 0.55rem 1.15rem;
-  border: 1px solid #fff;
-  border-radius: 4px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all .25s ease;
+#lb-video{ width:min(90vw,520px); max-height:88vh; background:#000; border-radius:10px;
+  outline:1px solid rgba(255,255,255,.15);
 }
-.btn:hover { background: #fff; color: #000; }
-
-/* ---- Footer invisibile (SEO only) ---- */
-.footer { display: none; }
-
-/* Brand link on book page */
-body.book .brand {
-  position: fixed;              /* stays at top */
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1rem;
-  letter-spacing: 0.5rem;
-  font-weight: 600;
-  text-decoration: none;
-  color: #fff;
-  opacity: .7;
-  z-index: 1000;                /* always above form */
+.lb-title{ margin-top:.5rem; text-align:center; opacity:.8; font-size:.95rem; }
+.lb-close{
+  position:absolute; top:16px; right:16px; border:1px solid rgba(255,255,255,.4);
+  background:transparent; color:#fff; padding:.35rem .5rem; border-radius:6px; cursor:pointer;
 }
-
-body.book .brand:hover { opacity: 1; transition: opacity .2s; }
-
-/* Push the page content down so it doesn’t overlap with brand */
-body.book .page {
-  padding-top: 80px;            /* adjust depending on brand height */
-}
-
-
-/* --- Strip (horizontal scroll) --- */
-.strip {
-  --card-w: 280px;         /* card width tuned for vertical videos */
-  --card-h: 500px;         /* height tuned for 9:16 feel */
-  margin-top: 1.5rem;
-  padding: 0 1.25rem 0 1.25rem;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: var(--card-w);
-  gap: 16px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
-}
-
-.strip::-webkit-scrollbar { height: 6px; }
-.strip::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-.strip::-webkit-scrollbar-track { background: #111; }
-
-/* --- Card --- */
-.card {
-  scroll-snap-align: start;
-  width: var(--card-w);
-  height: var(--card-h);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: 10px;
-  overflow: hidden;
-  background: #0b0b0b;
-  position: relative;
-}
-
-.card-btn {
-  all: unset;
-  cursor: pointer;
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.thumb {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: saturate(1) contrast(1.05);
-  transition: transform .25s ease, filter .25s ease;
-}
-
-.card-btn:hover .thumb {
-  transform: scale(1.02);
-  filter: saturate(1.1) contrast(1.1);
-}
-
-.caption {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  font-size: .85rem;
-  opacity: .8;
-}
-
-/* --- Lightbox --- */
-.lightbox[hidden] { display: none; }
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,.85);
-  backdrop-filter: blur(2px);
-  display: grid;
-  place-items: center;
-  z-index: 9999;
-}
-
-#lb-video {
-  width: min(90vw, 520px);
-  height: auto;
-  max-height: 88vh;
-  background: #000;
-  border-radius: 10px;
-  outline: 1px solid rgba(255,255,255,.15);
-}
-
-.lb-title {
-  margin-top: .5rem;
-  text-align: center;
-  opacity: .8;
-  font-size: .95rem;
-}
-
-.lb-close {
-  position: absolute;
-  top: 16px;
-  right: 16px;
-  border: 1px solid rgba(255,255,255,.4);
-  background: transparent;
-  color: #fff;
-  padding: .35rem .5rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.lb-close:hover { background: rgba(255,255,255,.1); }
-
-/* Keep hero centered; strip stays on same page without increasing height too much */
-.page {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  grid-template-rows: auto auto; /* hero + strip */
-  gap: 1rem;
-}
+.lb-close:hover{ background:rgba(255,255,255,.1); }
 
 /* Responsive tweaks */
-@media (max-width: 640px) {
-  .strip { --card-w: 220px; --card-h: 400px; gap: 12px; }
-  #lb-video { width: 94vw; }
+@media (max-width:640px){
+  .strip{ --card-w:220px; --card-h:400px; gap:12px; }
+  #lb-video{ width:94vw; }
 }
-
-/* Tighter spacing on content pages */
-.page h1 {
-  margin: 0.5rem 0 0.25rem;   /* instead of browser default ~2rem */
-}
-
-.page p.muted {
-  margin: 0.25rem 0 0.75rem;  /* reduce bottom gap before gallery */
-  font-size: 0.95rem; 
-}
-
-/* Reduce overall vertical spacing inside .page */
-.page {
-  gap: 0.5rem;   /* was 1.25rem, now tighter */
-}
-
-
