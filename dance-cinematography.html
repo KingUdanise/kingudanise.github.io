@@ -9,35 +9,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
 </head>
-<body>
+<body class="dance">
   <a href="/index.html" class="top-link">K I N G U D A N I S E</a>
 
-  <main class="page has-brand" aria-label="Dance cinematography">
-    <header>
-      <h1>D A N C E</h1>
-      <p class="muted">Choreography, battles and freestyles — the rhythm in motion.</p>
-    </header>
+  <main class="ring" aria-label="Dance cinematography">
+    <div class="ring-core">
+      <h1 class="ring-title">D A N C E</h1>
+    </div>
 
-    <section class="strip" aria-label="Dance gallery">
-      <article class="card">
-        <button class="card-btn" data-src="https://media.example.com/dance/d1.mp4" data-title="Dance — 01">
-          <img class="thumb" src="/images/dance/d1.jpg" alt="Dance 01" loading="lazy">
-          <span class="caption">Dance — 01</span>
-        </button>
-      </article>
-      <!-- …more cards… -->
-    </section>
-  </main>
+    <!-- Top row -->
+    <button class="ring-card v1" data-src="https://media.example.com/dance/d1.mp4" data-title="Dance — 01">
+      <img src="/images/dance/d1.jpg" alt="Dance 01" loading="lazy">
+    </button>
+    <button class="ring-card v2" data-src="https://media.example.com/dance/d2.mp4" data-title="Dance — 02">
+      <img src="/images/dance/d2.jpg" alt="Dance 02" loading="lazy">
+    </button>
+    <button class="ring-card v3" data-src="https://media.example.com/dance/d3.mp4" data-title="Dance — 03">
+      <img src="/images/dance/d3.jpg" alt="Dance 03" loading="lazy">
+    </button>
 
-  <div class="lightbox" id="lightbox" hidden>
-    <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
-    <div>
+    <!-- Bottom row -->
+    <button class="ring-card v4" data-src="https://media.example.com/dance/d4.mp4" data-title="Dance — 04">
+      <img src="/images/dance/d4.jpg" alt="Dance 04" loading="lazy">
+    </button>
+    <button class="ring-card v5" data-src="https://media.example.com/dance/d5.mp4" data-title="Dance — 05">
+      <img src="/images/dance/d5.jpg" alt="Dance 05" loading="lazy">
+    </button>
+    <button class="ring-card v6" data-src="https://media.example.com/dance/d6.mp4" data-title="Dance — 06">
+      <img src="/images/dance/d6.jpg" alt="Dance 06" loading="lazy">
+    </button>
+
+    <!-- Left big -->
+    <button class="ring-card v7" data-src="https://media.example.com/dance/d7.mp4" data-title="Dance — 07">
+      <img src="/images/dance/d7.jpg" alt="Dance 07" loading="lazy">
+    </button>
+    <!-- Right big -->
+    <button class="ring-card v8" data-src="https://media.example.com/dance/d8.mp4" data-title="Dance — 08">
+      <img src="/images/dance/d8.jpg" alt="Dance 08" loading="lazy">
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lb-close" aria-label="Close">×</button>
       <video id="lb-video" playsinline controls preload="metadata"></video>
       <div class="lb-title" id="lb-title"></div>
     </div>
-  </div>
+  </main>
 
   <footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
-  <script src="/script.js" defer></script>
-</body>
-</html>
+
+  <script>
+    c

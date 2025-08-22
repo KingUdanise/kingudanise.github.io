@@ -172,3 +172,116 @@ body.reels .v8{ grid-column:5; justify-self:start; margin-left: var(--sidePad) }
 
 /* ---------- Footer (hidden but kept for SEO) ---------- */
 .footer{ display:none }
+
+
+/* =========================================================
+   Layout grid per Dance, Cinematography e Recaps
+   (replica di Reels)
+   ========================================================= */
+
+/* Variabili comuni */
+body.dance,
+body.cinematography,
+body.recaps {
+  --smallW: clamp(140px, 12vw, 220px);
+  --bigW:   clamp(180px, 18vw, 320px);
+  --colGap: clamp(36px, 5.5vw, 96px);
+  --rowGap: clamp(28px, 6vh, 120px);
+  --sidePad: clamp(8px, 2.5vw, 40px);
+}
+
+/* Grid base */
+body.dance .ring,
+body.cinematography .ring,
+body.recaps .ring {
+  height:100vh; width:100vw; overflow:hidden;
+  display:grid;
+  grid-template-columns:
+    minmax(var(--sidePad), 1fr)
+    var(--smallW)
+    var(--smallW)
+    var(--smallW)
+    minmax(var(--sidePad), 1fr);
+  grid-template-rows: 1fr auto 1fr;
+  column-gap: var(--colGap);
+  row-gap: var(--rowGap);
+  align-items:center;
+  justify-items:center;
+}
+
+/* Titolo centrale */
+body.dance .ring-core,
+body.cinematography .ring-core,
+body.recaps .ring-core {
+  grid-column:3; grid-row:2;
+  position:static !important;
+  transform:none !important;
+  text-align:center; z-index:5; pointer-events:none;
+}
+body.dance .ring-sub,
+body.cinematography .ring-sub,
+body.recaps .ring-sub { display:none; } /* niente descrizione */
+
+/* Cards */
+body.dance .ring-card,
+body.cinematography .ring-card,
+body.recaps .ring-card {
+  display:block !important; position:static !important;
+  width:var(--smallW); aspect-ratio:9/16;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px; background:#0b0b0b;
+  overflow:hidden; cursor:pointer; z-index:2;
+  transition:transform .25s, box-shadow .25s;
+}
+body.dance .ring-card img,
+body.cinematography .ring-card img,
+body.recaps .ring-card img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Posizionamento con grid */
+.v1{ grid-column:2; grid-row:1; }
+.v2{ grid-column:3; grid-row:1; }
+.v3{ grid-column:4; grid-row:1; }
+.v4{ grid-column:2; grid-row:3; }
+.v5{ grid-column:3; grid-row:3; }
+.v6{ grid-column:4; grid-row:3; }
+.v7{ grid-column:1; grid-row:1/4; justify-self:end;  margin-right:var(--sidePad); align-self:center; width:var(--bigW);}
+.v8{ grid-column:5; grid-row:1/4; justify-self:start; margin-left: var(--sidePad); align-self:center; width:var(--bigW);}
+
+/* Offset personalizzati come in Reels */
+body.dance .v1, body.dance .v2, body.dance .v3,
+body.cinematography .v1, body.cinematography .v2, body.cinematography .v3,
+body.recaps .v1, body.recaps .v2, body.recaps .v3 {
+  transform: translateY(60px) scale(0.85);
+}
+body.dance .v4, body.dance .v5, body.dance .v6,
+body.cinematography .v4, body.cinematography .v5, body.cinematography .v6,
+body.recaps .v4, body.recaps .v5, body.recaps .v6 {
+  transform: translateY(-60px) scale(0.85);
+}
+body.dance .v7,
+body.cinematography .v7,
+body.recaps .v7 { transform: translateX(75px); }
+body.dance .v8,
+body.cinematography .v8,
+body.recaps .v8 { transform: translateX(-75px); }
+
+/* Mobile */
+@media (max-width:900px){
+  body.dance .ring,
+  body.cinematography .ring,
+  body.recaps .ring {
+    height:auto; padding:88px 16px 40px;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows:auto;
+    column-gap:14px; row-gap:14px;
+  }
+  body.dance .ring-core,
+  body.cinematography .ring-core,
+  body.recaps .ring-core { grid-column:1/3; order:-1; pointer-events:auto; }
+  body.dance .ring-card,
+  body.cinematography .ring-card,
+  body.recaps .ring-card { width:100%; transform:none !important; }
+  body.dance .v7, body.dance .v8,
+  body.cinematography .v7, body.cinematography .v8,
+  body.recaps .v7, body.recaps .v8 { grid-column:1/3; transform:none !important; }
+}
