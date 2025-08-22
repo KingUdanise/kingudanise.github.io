@@ -137,6 +137,7 @@ p{ margin-top:.5rem; font-size:1rem; opacity:.8; }
   z-index: 5;
   pointer-events: none;
 }
+
 .ring-title{
   margin: 0 0 .35rem 0;
   font-weight: 600;
@@ -196,6 +197,25 @@ p{ margin-top:.5rem; font-size:1rem; opacity:.8; }
   min-width: 180px;
 }
 
+/* ===== REELS — Tweak per dare aria al testo centrale ===== */
+.ring-card{
+  width: 12vw;          /* leggermente più piccoli top/bottom */
+  min-width: 140px;
+}
+
+/* più distanza dal testo: sposto su/giù e allargo lateralmente */
+.v1 { top: 8vh;  left: 24.5vw; }  /* prima: 6vh / 26vw */
+.v2 { top: 8vh;  left: 43.5vw; width: 10.75vw; } /* centrale: più stretto */
+.v3 { top: 8vh;  left: 62.5vw; }  /* prima: 6vh / 61vw */
+
+.v4 { bottom: 8vh; left: 24.5vw; }  /* prima: 6vh / 26vw */
+.v5 { bottom: 8vh; left: 43.5vw; width: 10.75vw; } /* centrale: più stretto */
+.v6 { bottom: 8vh; left: 62.5vw; }  /* prima: 6vh / 61vw */
+
+/* opzionale: riduco di un filo anche i laterali grandi per equilibrio */
+.v7, .v8 { width: 18vw; }  /* prima: 18.5vw */
+
+
 /* Lightbox: riusa le regole generiche sopra (#lb-video, .lb-close, ecc.) */
 
 /* Mobile / small screens — griglia semplice con scroll */
@@ -219,4 +239,45 @@ p{ margin-top:.5rem; font-size:1rem; opacity:.8; }
   /* il blocco testo occupa intera riga */
   .ring-core{ grid-column: 1 / -1; }
   .v7, .v8{ grid-column: 1 / -1; } /* i grandi a tutta riga */
+}
+
+
+/* ========================= */
+/*   BREAKPOINTS EXTRA LARGE */
+/* ========================= */
+
+/* Monitor Full HD / 1440p */
+@media (min-width: 1440px) {
+  .ring-card {
+    width: 10.5vw;       /* più compatti */
+    min-width: 160px;
+  }
+
+  .v1 { top: 9vh; left: 24vw; }
+  .v2 { top: 9vh; left: 43.5vw; width: 9.75vw; }
+  .v3 { top: 9vh; left: 63vw; }
+
+  .v4 { bottom: 9vh; left: 24vw; }
+  .v5 { bottom: 9vh; left: 43.5vw; width: 9.75vw; }
+  .v6 { bottom: 9vh; left: 63vw; }
+
+  .v7, .v8 { width: 17vw; }
+}
+
+/* Monitor 4K e oltre */
+@media (min-width: 1920px) {
+  .ring-card {
+    width: 9.5vw;        /* ancora più piccoli */
+    min-width: 180px;
+  }
+
+  .v1 { top: 10vh; left: 23vw; }
+  .v2 { top: 10vh; left: 43.5vw; width: 9vw; }
+  .v3 { top: 10vh; left: 64vw; }
+
+  .v4 { bottom: 10vh; left: 23vw; }
+  .v5 { bottom: 10vh; left: 43.5vw; width: 9vw; }
+  .v6 { bottom: 10vh; left: 64vw; }
+
+  .v7, .v8 { width: 16vw; }
 }
