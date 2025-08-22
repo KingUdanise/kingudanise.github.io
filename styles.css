@@ -29,6 +29,16 @@ p {
   opacity: 0.8;
 }
 
+p a {
+  color: #fff;
+  text-decoration: none;
+}
+
+p a:hover {
+  text-decoration: underline;
+}
+
+
 /* Footer invisibile */
 .footer {
   display: none;
