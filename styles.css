@@ -99,3 +99,26 @@ p {
 
 /* ---- Footer invisibile (SEO only) ---- */
 .footer { display: none; }
+
+/* Brand link on book page */
+body.book .brand {
+  position: fixed;              /* stays at top */
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  letter-spacing: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  opacity: .7;
+  z-index: 1000;                /* always above form */
+}
+
+body.book .brand:hover { opacity: 1; transition: opacity .2s; }
+
+/* Push the page content down so it doesn’t overlap with brand */
+body.book .page {
+  padding-top: 80px;            /* adjust depending on brand height */
+}
+
