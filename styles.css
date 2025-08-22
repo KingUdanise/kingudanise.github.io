@@ -1,15 +1,38 @@
-﻿html, body {
+﻿/* ---- Base layout ---- */
+html {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;        /* niente scroll */
+  overflow-x: hidden;                 /* lock horizontal scroll globally */
   background: #000;
   color: #fff;
-  font-family: 'Montserrat', sans-serif; /* full Montserrat */
+  font-family: 'Montserrat', sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;                   /* default: no scroll (home & other pages) */
+  background: transparent;            /* html already black */
+  color: inherit;
+  font-family: inherit;
+}
+
+/* ---- Book page: allow vertical scroll only here ---- */
+body.book {
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;  /* smooth iOS scrolling */
+  scrollbar-gutter: stable both-edges;/* avoid layout shift when scrollbar appears (supported browsers) */
+}
+
+/* ---- Fullscreen centered sections ---- */
+/* Home */
 .hero {
+  min-height: 100svh;                 /* better mobile viewport units */
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -18,10 +41,26 @@
   text-align: center;
 }
 
+/* Subpages (cinematography, reels, recaps, book, etc.) */
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem 1.25rem;              /* comfortable breathing room */
+}
+
+/* If you show a centered brand link on subpages, leave room at top */
+body.book .page { padding-top: 3.5rem; }
+
+/* ---- Typography ---- */
 h1 {
   font-size: 3rem;
   letter-spacing: 1rem;
   font-weight: 600;
+  margin: 0;                          /* remove default top gap */
 }
 
 p {
@@ -30,22 +69,21 @@ p {
   opacity: 0.8;
 }
 
-/* Link inline nella homepage */
-.overlay a {
-  color: inherit;           /* stesso colore del testo */
-  text-decoration: none;    /* niente sottolineatura */
+/* ---- Inline links (homepage tagline & general inline links) ---- */
+.overlay a,
+.page a {
+  color: inherit;
+  text-decoration: none;
   font-weight: inherit;
 }
-
-.overlay a:hover {
-  opacity: 0.8;             /* effetto hover leggero */
+.overlay a:hover,
+.page a:hover {
+  opacity: 0.8;
   transition: opacity 0.2s;
 }
 
-/* CTA */
-.cta {
-  margin-top: 1.75rem;
-}
+/* ---- CTA button (homepage) ---- */
+.cta { margin-top: 1.75rem; }
 
 .btn {
   display: inline-block;
@@ -57,13 +95,7 @@ p {
   font-weight: 600;
   transition: all .25s ease;
 }
+.btn:hover { background: #fff; color: #000; }
 
-.btn:hover {
-  background: #fff;
-  color: #000;
-}
-
-/* Footer invisibile (rimane per SEO) */
-.footer {
-  display: none;
-}
+/* ---- Footer invisibile (SEO only) ---- */
+.footer { display: none; }
