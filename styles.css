@@ -281,3 +281,34 @@ p{ margin-top:.5rem; font-size:1rem; opacity:.8; }
 
   .v7, .v8 { width: 16vw; }
 }
+
+/* ====== Allineamenti precisi REELS ====== */
+
+/* Colonna centrale sopra/sotto il testo: centra sull'asse X */
+.v2, .v5 {
+  left: 50% !important;
+  transform: translateX(-50%);          /* centra orizzontalmente */
+  width: 10.75vw;                        /* puoi tenere il tuo valore */
+}
+/* Mantieni l'hover senza perdere il centraggio */
+.v2:hover, .v5:hover {
+  transform: translateX(-50%) translateY(-2px) scale(1.02);
+}
+
+/* Poster laterali grandi: centra verticalmente rispetto al testo */
+.v7, .v8 {
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+/* Hover che mantiene il centraggio verticale */
+.v7:hover, .v8:hover {
+  transform: translateY(calc(-50% - 2px)) scale(1.02);
+}
+
+/* ——— opzionale: micro-tuning per 1440p e 4K, mantiene il centraggio ——— */
+@media (min-width: 1440px) {
+  .v2, .v5 { width: 9.75vw; }           /* stesso valore che usi nel breakpoint */
+}
+@media (min-width: 1920px) {
+  .v2, .v5 { width: 9vw; }              /* idem per 4K */
+}
