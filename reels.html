@@ -57,7 +57,35 @@
   <!-- Contenuto pagina centrato -->
   <main class="page">
     <h1>REELS</h1>
-    <p>Here you will find reels and short edits by KINGUDANISE: high-energy clips and highlights from breaking & hip-hop culture.</p>
+<p class="muted">Short, vertical edits — breaking & hip-hop.</p>
+
+<!-- Horizontal gallery -->
+<section class="strip" aria-label="Reels gallery">
+  <!-- Card -->
+  <article class="card">
+    <button class="card-btn" data-src="https://media.example.com/reels/r1.mp4" data-title="Showcase — 01">
+      <img class="thumb" src="/images/reels/r1-poster.jpg" alt="Reel 01 poster" loading="lazy">
+      <span class="caption">Showcase — 01</span>
+    </button>
+  </article>
+
+  <article class="card">
+    <button class="card-btn" data-src="https://media.example.com/reels/r2.mp4" data-title="Showcase — 02">
+      <img class="thumb" src="/images/reels/r2-poster.jpg" alt="Reel 02 poster" loading="lazy">
+      <span class="caption">Showcase — 02</span>
+    </button>
+  </article>
+
+  <!-- duplicate more cards as needed -->
+</section>
+
+<!-- Lightbox / modal -->
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" aria-label="Close">✕</button>
+  <video id="lb-video" playsinline controls preload="metadata"></video>
+  <div class="lb-title" id="lb-title"></div>
+</div>
+
   </main>
 
   <!-- Footer invisibile (solo SEO) -->
