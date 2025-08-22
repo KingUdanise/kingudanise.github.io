@@ -83,6 +83,29 @@
     .ring-card{ width:100%; }
     .v7, .v8{ grid-column:1/3; }
   }
+  
+  /* ===== Adjustments requested ===== */
+
+/* 1) Nascondi descrizione */
+body.reels .ring-sub { display: none !important; }
+
+/* 2) Forza il titolo REELS su una riga */
+body.reels .ring-title {
+  white-space: nowrap;
+  letter-spacing: 0.8rem;  /* leggermente stretto se serve */
+}
+
+/* 3) Riduci box centrali (v1..v6) del 15% */
+body.reels .v1,
+body.reels .v2,
+body.reels .v3,
+body.reels .v4,
+body.reels .v5,
+body.reels .v6 {
+  transform: scale(0.85);              /* 15% più piccoli */
+  transform-origin: center center;     /* mantieni centraggio */
+}
+
 </style>
 
 </head>
