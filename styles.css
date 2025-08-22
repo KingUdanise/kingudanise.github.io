@@ -242,3 +242,19 @@ body.book .page {
   #lb-video { width: 94vw; }
 }
 
+/* Tighter spacing on content pages */
+.page h1 {
+  margin: 0.5rem 0 0.25rem;   /* instead of browser default ~2rem */
+}
+
+.page p.muted {
+  margin: 0.25rem 0 0.75rem;  /* reduce bottom gap before gallery */
+  font-size: 0.95rem; 
+}
+
+/* Reduce overall vertical spacing inside .page */
+.page {
+  gap: 0.5rem;   /* was 1.25rem, now tighter */
+}
+
+
