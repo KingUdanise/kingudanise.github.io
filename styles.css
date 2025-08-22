@@ -312,3 +312,40 @@ p{ margin-top:.5rem; font-size:1rem; opacity:.8; }
 @media (min-width: 1920px) {
   .v2, .v5 { width: 9vw; }              /* idem per 4K */
 }
+
+/* ===== REELS — Allineamento millimetrico ===== */
+:root{
+  /* distanza orizzontale tra le tre colonne rispetto al centro */
+  --ring-col-gap: 18vw; /* aumenta/riduci se vuoi allargare/stringere */
+}
+
+/* Colonna centrale esattamente allineata al centro pagina */
+.v2, .v5{
+  left: 50% !important;
+  transform: translateX(-50%);
+}
+/* Mantieni l’hover senza perdere il centraggio */
+.v2:hover, .v5:hover{
+  transform: translateX(-50%) translateY(-2px) scale(1.02);
+}
+
+/* Colonne laterali top/bottom simmetriche rispetto al centro */
+.v1, .v4{ left: calc(50% - var(--ring-col-gap)) !important; }
+.v3, .v6{ left: calc(50% + var(--ring-col-gap)) !important; }
+
+/* Laterali grandi: centrati verticalmente rispetto al testo centrale */
+.v7, .v8{
+  top: 50% !important;
+  transform: translateY(-50%);
+}
+.v7:hover, .v8:hover{
+  transform: translateY(calc(-50% - 2px)) scale(1.02);
+}
+
+/* Facoltativo: piccoli aggiustamenti su schermi grandi */
+@media (min-width:1440px){
+  :root{ --ring-col-gap: 19vw; }
+}
+@media (min-width:1920px){
+  :root{ --ring-col-gap: 20vw; }
+}
