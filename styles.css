@@ -349,3 +349,71 @@ p{ margin-top:.5rem; font-size:1rem; opacity:.8; }
 @media (min-width:1920px){
   :root{ --ring-col-gap: 20vw; }
 }
+
+/* ===== REELS — Spacing fluido e centrato a ogni risoluzione ===== */
+.ring{
+  /* valori fluidi: si adattano da laptop a 4K */
+  --cardW:   clamp(140px, 12vw, 220px);   /* poster piccoli (file centrali) */
+  --bigW:    clamp(180px, 18vw, 320px);   /* poster laterali grandi */
+  --colGap:  clamp(140px, 18vw, 360px);   /* distanza col SX/DX dal centro */
+  --rowGap:  clamp(120px, 16vh, 260px);   /* distanza riga TOP/BOTTOM dal centro */
+  --sideK:   2.6;                         /* fattore per posizionare i laterali */
+}
+
+/* base: usiamo variabili di trasformazione per non rompere il centraggio con l'hover */
+.ring-card{
+  width: var(--cardW) !important;
+  --tx: translateX(0);
+  --ty: translateY(0);
+  transform: var(--tx) var(--ty);
+}
+.ring-card:hover{
+  transform: var(--tx) var(--ty) translateY(-2px) scale(1.02);
+}
+
+/* larghezza dei laterali grandi */
+.v7, .v8 { width: var(--bigW) !important; }
+
+/* ---------- COLONNE: centratura orizzontale perfetta ---------- */
+/* colonna centrale (sopra/sotto il titolo) */
+.v2, .v5{
+  left: 50% !important;
+  --tx: translateX(-50%);
+}
+/* colonna sinistra */
+.v1, .v4{
+  left: 50% !important;
+  --tx: translateX(calc(-50% - var(--colGap)));
+}
+/* colonna destra */
+.v3, .v6{
+  left: 50% !important;
+  --tx: translateX(calc(-50% + var(--colGap)));
+}
+
+/* ---------- RIGHE: centratura verticale perfetta ---------- */
+.v1, .v2, .v3{ top: calc(50% - var(--rowGap)) !important; } /* riga in alto */
+.v4, .v5, .v6{ top: calc(50% + var(--rowGap)) !important; } /* riga in basso */
+
+/* ---------- LATERALI GRANDI: centrati verticalmente ---------- */
+.v7, .v8{
+  top: 50% !important;
+  --ty: translateY(-50%);
+}
+/* posizionamento orizzontale dei laterali come multiplo della spaziatura centrale */
+.v7{
+  left: calc(50% - (var(--colGap) * var(--sideK))) !important;
+  --tx: translateX(-50%);
+}
+.v8{
+  left: calc(50% + (var(--colGap) * var(--sideK))) !important;
+  --tx: translateX(-50%);
+}
+
+/* micro-tuning automatico su schermi molto grandi (opzionale) */
+@media (min-width: 1440px){
+  .ring{ --sideK: 2.7; }
+}
+@media (min-width: 1920px){
+  .ring{ --sideK: 2.8; }
+}
