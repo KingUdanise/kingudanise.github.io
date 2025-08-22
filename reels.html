@@ -4,129 +4,153 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Reels — KINGUDANISE</title>
-  <meta name="description" content="Reels by KINGUDANISE — short edits, high-energy clips and highlights from breaking & hip-hop events.">
+  <meta name="description" content="Short vertical edits — breaking & hip-hop reels by KINGUDANISE.">
+  <link rel="stylesheet" href="/styles.css"/>
 
-  <!-- Import Montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="styles.css"/>
+  <!-- Small page-scoped styles for gallery + lightbox -->
   <style>
-    body {
-      font-family: 'Montserrat', system-ui, sans-serif;
+    /* Brand link (top center, above content) */
+    .top-link{
+      position:absolute; top:18px; left:50%; transform:translateX(-50%);
+      font-size:.9rem; letter-spacing:.5rem; text-decoration:none;
+      color:#fff; opacity:.7; font-weight:600;
     }
-    .top-link {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 0.9rem;
-      letter-spacing: 0.5rem;
-      text-decoration: none;
-      color: #fff;
-      opacity: 0.7;
+    .top-link:hover{ opacity:1; transition:opacity .2s; }
+
+    /* Optional ambient background behind page text */
+    .ambient{ position:absolute; inset:0; z-index:-1; overflow:hidden; opacity:.15; filter:blur(6px) saturate(1.05); }
+    .ambient video{ width:100%; height:100%; object-fit:cover; }
+
+    /* Horizontal card strip (for vertical posters) */
+    .strip{
+      display:flex; gap:1rem;
+      overflow-x:auto; overflow-y:hidden;
+      padding:1rem .75rem; margin:0 auto; max-width:1100px;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
     }
-    .top-link:hover {
-      opacity: 1;
-      transition: opacity 0.2s;
+    .strip::-webkit-scrollbar{ height:8px; }
+    .strip::-webkit-scrollbar-thumb{ background:#333; border-radius:6px; }
+    .card{
+      flex:0 0 auto; width:240px; scroll-snap-align:start;
+      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
+      border-radius:10px; overflow:hidden; text-align:center;
     }
-    .page {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+    .card-btn{ all:unset; cursor:pointer; display:block; width:100%; }
+    .thumb{ width:100%; height:360px; object-fit:cover; display:block; background:#111; }
+    .caption{ display:block; padding:.55rem .35rem; font-size:.95rem; opacity:.8; }
+
+    /* Lightbox modal */
+    .lightbox[hidden]{ display:none; }
+    .lightbox{
+      position:fixed; inset:0; background:rgba(0,0,0,.9);
+      display:flex; align-items:center; justify-content:center; z-index:9999; padding:1rem;
     }
-    .page h1 {
-      font-size: 2.5rem;
-      letter-spacing: 0.5rem;
-      font-weight: 600;
+    .lb-close{
+      position:absolute; top:14px; right:14px;
+      background:transparent; border:1px solid #fff; color:#fff;
+      border-radius:50px; padding:.35rem .6rem; cursor:pointer; opacity:.85;
     }
-    .page p {
-      max-width: 600px;
-      font-size: 1rem;
-      opacity: 0.85;
-      font-weight: 400;
-    }
+    .lb-close:hover{ opacity:1; }
+    .lb-wrap{ max-width:min(92vw, 560px); width:100%; }
+    .lb-video{ width:100%; max-height:70vh; background:#000; border-radius:8px; }
+    .lb-title{ text-align:center; margin-top:.5rem; opacity:.8; }
   </style>
 </head>
 <body>
-  <!-- Link alla homepage -->
-  <a href="index.html" class="top-link">K I N G U D A N I S E</a>
 
-  <!-- Contenuto pagina centrato -->
+  <!-- Link to home (top center) -->
+  <a href="/index.html" class="top-link">K I N G U D A N I S E</a>
+
   <main class="page">
+    <!-- Optional ambient background (remove if you don’t want motion) -->
+    <div class="ambient">
+      <video autoplay muted loop playsinline preload="metadata">
+        <!-- replace with your soft loop / b-roll -->
+        <source src="https://media.example.com/broll/soft-loop.mp4" type="video/mp4">
+      </video>
+    </div>
+
     <h1>REELS</h1>
-<p class="muted">Short, vertical edits — breaking & hip-hop.</p>
+    <p class="muted">Short, vertical edits — breaking & hip-hop.</p>
 
-<!-- Horizontal gallery -->
-<section class="strip" aria-label="Reels gallery">
-  <!-- Card -->
-  <article class="card">
-    <button class="card-btn" data-src="https://media.example.com/reels/r1.mp4" data-title="Showcase — 01">
-      <img class="thumb" src="/images/reels/r1-poster.jpg" alt="Reel 01 poster" loading="lazy">
-      <span class="caption">Showcase — 01</span>
-    </button>
-  </article>
+    <!-- Horizontal gallery -->
+    <section class="strip" aria-label="Reels gallery">
 
-  <article class="card">
-    <button class="card-btn" data-src="https://media.example.com/reels/r2.mp4" data-title="Showcase — 02">
-      <img class="thumb" src="/images/reels/r2-poster.jpg" alt="Reel 02 poster" loading="lazy">
-      <span class="caption">Showcase — 02</span>
-    </button>
-  </article>
+      <!-- Card 1 -->
+      <article class="card">
+        <button class="card-btn" data-src="https://media.example.com/reels/r1.mp4" data-title="Showcase — 01">
+          <img class="thumb" src="/images/reels/r1-poster.jpg" alt="Reel 01 poster" loading="lazy">
+          <span class="caption">Showcase — 01</span>
+        </button>
+      </article>
 
-  <!-- duplicate more cards as needed -->
-</section>
+      <!-- Card 2 -->
+      <article class="card">
+        <button class="card-btn" data-src="https://media.example.com/reels/r2.mp4" data-title="Showcase — 02">
+          <img class="thumb" src="/images/reels/r2-poster.jpg" alt="Reel 02 poster" loading="lazy">
+          <span class="caption">Showcase — 02</span>
+        </button>
+      </article>
 
-<!-- Lightbox / modal -->
-<div class="lightbox" id="lightbox" hidden>
-  <button class="lb-close" aria-label="Close">✕</button>
-  <video id="lb-video" playsinline controls preload="metadata"></video>
-  <div class="lb-title" id="lb-title"></div>
-</div>
+      <!-- Duplicate more cards as needed… -->
+      <!--
+      <article class="card">
+        <button class="card-btn" data-src="VIDEO_URL.mp4" data-title="Title here">
+          <img class="thumb" src="/images/reels/POSTER.jpg" alt="Title poster" loading="lazy">
+          <span class="caption">Title here</span>
+        </button>
+      </article>
+      -->
 
+    </section>
   </main>
 
-  <!-- Footer invisibile (solo SEO) -->
-<footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
+  <!-- Lightbox / modal -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lb-close" aria-label="Close">×</button>
+    <div class="lb-wrap">
+      <video id="lb-video" class="lb-video" playsinline controls preload="metadata"></video>
+      <div class="lb-title" id="lb-title"></div>
+    </div>
+  </div>
 
-<script>
-  (function(){
-    const lb = document.getElementById('lightbox');
-    const video = document.getElementById('lb-video');
-    const titleEl = document.getElementById('lb-title');
+  <!-- Footer invisible (SEO only) -->
+  <footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
 
-    document.querySelectorAll('.card-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const src = btn.getAttribute('data-src');
-        const title = btn.getAttribute('data-title') || '';
-        titleEl.textContent = title;
-        video.src = src;
-        video.currentTime = 0;
-        lb.hidden = false;
-        video.play().catch(()=>{});
+  <!-- Lightbox logic (place before </body>) -->
+  <script>
+    (function(){
+      const lb = document.getElementById('lightbox');
+      const video = document.getElementById('lb-video');
+      const titleEl = document.getElementById('lb-title');
+
+      document.querySelectorAll('.card-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const src = btn.getAttribute('data-src');
+          const title = btn.getAttribute('data-title') || '';
+          titleEl.textContent = title;
+          video.src = src;
+          video.currentTime = 0;
+          lb.hidden = false;
+          video.play().catch(()=>{});
+        });
       });
-    });
 
-    function closeLB() {
-      video.pause();
-      video.src = '';
-      lb.hidden = true;
-    }
+      function closeLB() {
+        video.pause();
+        video.src = '';
+        lb.hidden = true;
+      }
 
-    document.querySelector('.lb-close').addEventListener('click', closeLB);
-    lb.addEventListener('click', (e) => {
-      if (e.target === lb) closeLB();
-    });
-
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !lb.hidden) closeLB();
-    });
-  })();
-</script>
-</body>
-</html>
-
+      document.querySelector('.lb-close').addEventListener('click', closeLB);
+      lb.addEventListener('click', (e) => {
+        if (e.target === lb) closeLB();      // click on backdrop
+      });
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !lb.hidden) closeLB();
+      });
+    })();
+  </script>
 </body>
 </html>
