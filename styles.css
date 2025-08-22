@@ -1,419 +1,146 @@
 ﻿/* =========================================================
-   KINGUDANISE — Global Styles (merged)
+   KINGUDANISE — Global Styles (clean)
    ========================================================= */
 
-/* ---------- Base layout ---------- */
+/* ---------- Base ---------- */
+html,body{height:100%}
 html{
-  margin:0; padding:0; height:100%; width:100%;
-  overflow-x:hidden;                /* lock horizontal scroll globally */
-  background:#000; color:#fff;
-  font-family:'Montserrat',sans-serif;
+  margin:0; padding:0; width:100%;
+  background:#000; color:#fff; overflow-x:hidden;
+  font-family:'Montserrat',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
 }
 body{
-  margin:0; padding:0; height:100%; width:100%;
-  overflow:hidden;                  /* default: no scroll */
-  background:transparent; color:inherit; font-family:inherit;
+  margin:0; padding:0; width:100%;
+  background:transparent; color:inherit;
 }
 
-/* Book page: allow vertical scroll */
-body.book{
-  overflow-y:auto; overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-gutter:stable both-edges;
-}
-
-/* ---------- Fullscreen centered sections ---------- */
-.hero{
-  min-height:100svh;
-  display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center;
-}
-.page{
-  min-height:100svh;
-  display:grid; place-items:center;
-  grid-template-rows:auto auto;   /* hero (title/strapline) + gallery strip */
-  gap:.5rem;                      /* tight vertical rhythm */
-  padding:2rem 1.25rem;
-}
-
-/* Quando c’è il brand link in alto */
-.page.has-brand{ padding-top:80px; }
-
-/* ---------- Typography ---------- */
-h1{ margin:0; font-size:3rem; letter-spacing:1rem; font-weight:600; }
-p{ margin-top:.5rem; font-size:1rem; opacity:.8; }
-
-/* Link inline (home tagline & subpages) */
-.overlay a, .page a{ color:inherit; text-decoration:none; font-weight:inherit; }
-.overlay a:hover, .page a:hover{ opacity:.8; transition:opacity .2s; }
-
-/* CTA (home) */
-.cta{ margin-top:1.75rem; }
-.btn{
-  display:inline-block; padding:.55rem 1.15rem; border:1px solid #fff; border-radius:4px;
-  color:#fff; text-decoration:none; font-weight:600; transition:all .25s ease;
-}
-.btn:hover{ background:#fff; color:#000; }
-
-/* Footer invisibile (rimane per SEO) */
-.footer{ display:none; }
-
-/* ---------- Tiny brand link (all subpages) ---------- */
+/* ---------- Brand link ---------- */
 .top-link{
-  position:fixed; top:15px; left:50%; transform:translateX(-50%);
+  position:fixed; top:14px; left:50%; transform:translateX(-50%);
   font-size:.9rem; letter-spacing:.5rem; font-weight:600; text-decoration:none;
-  color:#fff; opacity:.7; z-index:1000;
+  color:#fff; opacity:.75; z-index:1000;
 }
 .top-link:hover{ opacity:1; transition:opacity .2s; }
 
-/* =========================================================
-   STRIP ORIZZONTALE (vertical clips in row) + LIGHTBOX
-   — usato dove vuoi una galleria a scorrimento orizzontale
-   ========================================================= */
-.strip{
-  --card-w:280px; --card-h:500px;
-  margin-top:.5rem; padding:0 1.25rem;
-  display:grid; grid-auto-flow:column; grid-auto-columns:var(--card-w);
-  gap:16px; overflow-x:auto; overflow-y:hidden;
-  scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch;
-}
-.strip::-webkit-scrollbar{ height:6px; } 
-.strip::-webkit-scrollbar-thumb{ background:#333; border-radius:3px; }
-.strip::-webkit-scrollbar-track{ background:#111; }
-
-.card{
-  scroll-snap-align:start; width:var(--card-w); height:var(--card-h);
-  border:1px solid rgba(255,255,255,.1); border-radius:10px; overflow:hidden;
-  background:#0b0b0b; position:relative;
-}
-.card-btn{ all:unset; cursor:pointer; display:block; width:100%; height:100%; position:relative; }
-.thumb{
-  width:100%; height:100%; object-fit:cover; display:block;
-  filter:saturate(1) contrast(1.05);
-  transition:transform .25s ease, filter .25s ease;
-}
-.card-btn:hover .thumb{ transform:scale(1.02); filter:saturate(1.1) contrast(1.1); }
-.caption{ position:absolute; left:10px; bottom:10px; font-size:.85rem; opacity:.85; }
-
-/* Lightbox (riuso anche per REELS ring) */
+/* ---------- Lightbox (riuso) ---------- */
 .lightbox[hidden]{ display:none; }
 .lightbox{
   position:fixed; inset:0; display:grid; place-items:center;
-  background:rgba(0,0,0,.85); backdrop-filter:blur(2px); z-index:9999;
+  background:rgba(0,0,0,.86); backdrop-filter:blur(2px); z-index:9999;
 }
 #lb-video{
   width:min(90vw,520px); max-height:88vh; background:#000; border-radius:10px;
   outline:1px solid rgba(255,255,255,.15);
 }
-.lb-title{ margin-top:.5rem; text-align:center; opacity:.8; font-size:.95rem; }
+.lb-title{ margin-top:.5rem; text-align:center; opacity:.85; font-size:.95rem; }
 .lb-close{
-  position:absolute; top:16px; right:16px; border:1px solid rgba(255,255,255,.4);
-  background:transparent; color:#fff; padding:.35rem .5rem; border-radius:6px; cursor:pointer;
+  position:absolute; top:16px; right:16px; border:1px solid rgba(255,255,255,.45);
+  background:transparent; color:#fff; padding:.35rem .55rem; border-radius:6px; cursor:pointer;
 }
-.lb-close:hover{ background:rgba(255,255,255,.1); }
+.lb-close:hover{ background:rgba(255,255,255,.12); }
 
-@media (max-width:640px){
-  .strip{ --card-w:220px; --card-h:400px; gap:12px; }
-  #lb-video{ width:94vw; }
+/* =========================================================
+   REELS — RING LAYOUT with GRID (perfettamente centrato)
+   ========================================================= */
+
+/* Variabili fluide per dimensioni e spazi */
+:root{
+  /* larghezze card */
+  --smallW: clamp(140px, 12vw, 220px);   /* v1..v6 */
+  --bigW:   clamp(180px, 18vw, 320px);   /* v7, v8 */
+
+  /* gap tra colonne/righe (fluido = perfetto su ogni risoluzione) */
+  --colGap: clamp(36px, 5.5vw, 96px);
+  --rowGap: clamp(28px, 6vh, 120px);
+
+  /* padding orizzontale bordo schermo */
+  --sidePad: clamp(8px, 2.5vw, 40px);
+}
+
+/* Contenitore a griglia:
+   5 colonne -> [side] [col1] [centro] [col3] [side]
+   3 righe   -> [top] [center text] [bottom]                                    */
+.ring{
+  height: 100vh; width: 100vw; overflow:hidden; position:relative;
+  display:grid;
+  grid-template-columns:
+    minmax(var(--sidePad), 1fr)
+    var(--smallW)
+    var(--smallW)
+    var(--smallW)
+    minmax(var(--sidePad), 1fr);
+  grid-template-rows:
+    1fr
+    auto
+    1fr;
+  column-gap: var(--colGap);
+  row-gap: var(--rowGap);
+  align-items:center;         /* centra verticalmente gli elementi nelle celle */
+  justify-items:center;       /* centra orizzontalmente gli elementi nelle celle */
+}
+
+/* Blocco testo centrale: cella (colonna 3, riga 2) */
+.ring-core{
+  grid-column: 3; grid-row: 2;
+  text-align:center; pointer-events:none; z-index:5;
+}
+.ring-title{
+  margin:0 0 .55rem 0;
+  font-weight:600; letter-spacing:1rem;
+  font-size: clamp(22px, 3.2vw, 36px);
+}
+.ring-sub{
+  margin:0; opacity:.85; font-size: clamp(12px, 1.2vw, 16px);
+}
+
+/* Card generiche */
+.ring-card{
+  width: var(--smallW);
+  aspect-ratio: 9/16;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background:#0b0b0b; overflow:hidden; cursor:pointer; z-index:2;
+  transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
+}
+.ring-card:hover{ transform: translateY(-2px) scale(1.02); box-shadow:0 20px 50px rgba(0,0,0,.55); }
+.ring-card img{ width:100%; height:100%; object-fit:cover; display:block; filter:brightness(.92); }
+
+/* Posizionamento con GRID (niente più left/top) */
+/* Top row */
+.v1{ grid-column:2; grid-row:1; }
+.v2{ grid-column:3; grid-row:1; }
+.v3{ grid-column:4; grid-row:1; }
+
+/* Bottom row */
+.v4{ grid-column:2; grid-row:3; }
+.v5{ grid-column:3; grid-row:3; }
+.v6{ grid-column:4; grid-row:3; }
+
+/* Laterali grandi: colonna 1 e 5, centrati verticalmente su tutte le righe */
+.v7, .v8{
+  width: var(--bigW);
+  grid-row: 1 / 4;            /* occupa tutte e 3 le righe */
+  align-self: center;         /* centra verticalmente */
+}
+.v7{ grid-column:1; justify-self:end;  margin-right: var(--sidePad); }
+.v8{ grid-column:5; justify-self:start; margin-left:  var(--sidePad); }
+
+/* =========================================================
+   Responsive (mobile) — griglia 2 colonne sotto al testo
+   ========================================================= */
+@media (max-width: 900px){
+  body{ overflow-y:auto; }
+  .ring{
+    height:auto; padding:88px 16px 40px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    column-gap:14px; row-gap:14px;
+  }
+  .ring-core{ grid-column:1/3; order:-1; pointer-events:auto; }
+  .ring-card{ width:100%; }
+  .v7, .v8{ grid-column:1/3; }  /* i laterali a tutta riga */
 }
 
 /* =========================================================
-   REELS — RING LAYOUT (8 poster attorno al testo centrale)
+   Fine
    ========================================================= */
-.ring{
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;             /* no page scroll (desktop) */
-  background: #000;
-  font-family: 'Montserrat', sans-serif;
-}
-
-/* Blocco testo centrale */
-.ring-core{
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%,-50%);
-  text-align: center;
-  z-index: 5;
-  pointer-events: none;
-}
-
-.ring-title{
-  margin: 0 0 .35rem 0;
-  font-weight: 600;
-  font-size: clamp(20px, 3.2vw, 34px);
-  letter-spacing: 1rem;
-}
-.ring-sub{
-  margin: 0;
-  opacity: .8;
-  font-size: clamp(12px, 1.2vw, 16px);
-}
-
-/* Poster verticali */
-.ring-card{
-  position: absolute;
-  aspect-ratio: 9 / 16;
-  width: 13.5vw;               /* default size (top/bottom) */
-  min-width: 140px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,.12);
-  background: #111;
-  overflow: hidden;
-  z-index: 2;
-  cursor: pointer;
-  transition: transform .25s ease, box-shadow .25s ease, opacity .25s ease;
-}
-.ring-card:hover{
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0,0,0,.5);
-}
-.ring-card img{
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  filter: brightness(.92);
-}
-
-/* Posizionamento preciso (desktop) */
-/* Top row (3) */
-.v1 { top: 6vh;  left: 26vw; }
-.v2 { top: 6vh;  left: 43.5vw; }
-.v3 { top: 6vh;  left: 61vw; }
-
-/* Bottom row (3) */
-.v4 { bottom: 6vh; left: 26vw; }
-.v5 { bottom: 6vh; left: 43.5vw; }
-.v6 { bottom: 6vh; left: 61vw; }
-
-/* Left big, Right big */
-.v7 {
-  left: 3vw; top: 8vh;
-  width: 18.5vw;
-  min-width: 180px;
-}
-.v8 {
-  right: 3vw; top: 8vh;
-  width: 18.5vw;
-  min-width: 180px;
-}
-
-/* ===== REELS — Tweak per dare aria al testo centrale ===== */
-.ring-card{
-  width: 12vw;          /* leggermente più piccoli top/bottom */
-  min-width: 140px;
-}
-
-/* più distanza dal testo: sposto su/giù e allargo lateralmente */
-.v1 { top: 8vh;  left: 24.5vw; }  /* prima: 6vh / 26vw */
-.v2 { top: 8vh;  left: 43.5vw; width: 10.75vw; } /* centrale: più stretto */
-.v3 { top: 8vh;  left: 62.5vw; }  /* prima: 6vh / 61vw */
-
-.v4 { bottom: 8vh; left: 24.5vw; }  /* prima: 6vh / 26vw */
-.v5 { bottom: 8vh; left: 43.5vw; width: 10.75vw; } /* centrale: più stretto */
-.v6 { bottom: 8vh; left: 62.5vw; }  /* prima: 6vh / 61vw */
-
-/* opzionale: riduco di un filo anche i laterali grandi per equilibrio */
-.v7, .v8 { width: 18vw; }  /* prima: 18.5vw */
-
-
-/* Lightbox: riusa le regole generiche sopra (#lb-video, .lb-close, ecc.) */
-
-/* Mobile / small screens — griglia semplice con scroll */
-@media (max-width: 900px){
-  body { overflow-y: auto; }                 /* consenti scroll su schermi piccoli */
-  .ring { height: auto; padding: 84px 16px 40px; }
-  .ring-core{
-    position: relative;
-    transform: none;
-    top: auto; left: auto;
-    margin: 0 auto 18px;
-    pointer-events: auto;
-  }
-  .ring-card{ position: static; width: 100%; min-width: 0; }
-  /* disposizione a griglia 2 colonne */
-  .ring{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-  /* il blocco testo occupa intera riga */
-  .ring-core{ grid-column: 1 / -1; }
-  .v7, .v8{ grid-column: 1 / -1; } /* i grandi a tutta riga */
-}
-
-
-/* ========================= */
-/*   BREAKPOINTS EXTRA LARGE */
-/* ========================= */
-
-/* Monitor Full HD / 1440p */
-@media (min-width: 1440px) {
-  .ring-card {
-    width: 10.5vw;       /* più compatti */
-    min-width: 160px;
-  }
-
-  .v1 { top: 9vh; left: 24vw; }
-  .v2 { top: 9vh; left: 43.5vw; width: 9.75vw; }
-  .v3 { top: 9vh; left: 63vw; }
-
-  .v4 { bottom: 9vh; left: 24vw; }
-  .v5 { bottom: 9vh; left: 43.5vw; width: 9.75vw; }
-  .v6 { bottom: 9vh; left: 63vw; }
-
-  .v7, .v8 { width: 17vw; }
-}
-
-/* Monitor 4K e oltre */
-@media (min-width: 1920px) {
-  .ring-card {
-    width: 9.5vw;        /* ancora più piccoli */
-    min-width: 180px;
-  }
-
-  .v1 { top: 10vh; left: 23vw; }
-  .v2 { top: 10vh; left: 43.5vw; width: 9vw; }
-  .v3 { top: 10vh; left: 64vw; }
-
-  .v4 { bottom: 10vh; left: 23vw; }
-  .v5 { bottom: 10vh; left: 43.5vw; width: 9vw; }
-  .v6 { bottom: 10vh; left: 64vw; }
-
-  .v7, .v8 { width: 16vw; }
-}
-
-/* ====== Allineamenti precisi REELS ====== */
-
-/* Colonna centrale sopra/sotto il testo: centra sull'asse X */
-.v2, .v5 {
-  left: 50% !important;
-  transform: translateX(-50%);          /* centra orizzontalmente */
-  width: 10.75vw;                        /* puoi tenere il tuo valore */
-}
-/* Mantieni l'hover senza perdere il centraggio */
-.v2:hover, .v5:hover {
-  transform: translateX(-50%) translateY(-2px) scale(1.02);
-}
-
-/* Poster laterali grandi: centra verticalmente rispetto al testo */
-.v7, .v8 {
-  top: 50% !important;
-  transform: translateY(-50%);
-}
-/* Hover che mantiene il centraggio verticale */
-.v7:hover, .v8:hover {
-  transform: translateY(calc(-50% - 2px)) scale(1.02);
-}
-
-/* ——— opzionale: micro-tuning per 1440p e 4K, mantiene il centraggio ——— */
-@media (min-width: 1440px) {
-  .v2, .v5 { width: 9.75vw; }           /* stesso valore che usi nel breakpoint */
-}
-@media (min-width: 1920px) {
-  .v2, .v5 { width: 9vw; }              /* idem per 4K */
-}
-
-/* ===== REELS — Allineamento millimetrico ===== */
-:root{
-  /* distanza orizzontale tra le tre colonne rispetto al centro */
-  --ring-col-gap: 18vw; /* aumenta/riduci se vuoi allargare/stringere */
-}
-
-/* Colonna centrale esattamente allineata al centro pagina */
-.v2, .v5{
-  left: 50% !important;
-  transform: translateX(-50%);
-}
-/* Mantieni l’hover senza perdere il centraggio */
-.v2:hover, .v5:hover{
-  transform: translateX(-50%) translateY(-2px) scale(1.02);
-}
-
-/* Colonne laterali top/bottom simmetriche rispetto al centro */
-.v1, .v4{ left: calc(50% - var(--ring-col-gap)) !important; }
-.v3, .v6{ left: calc(50% + var(--ring-col-gap)) !important; }
-
-/* Laterali grandi: centrati verticalmente rispetto al testo centrale */
-.v7, .v8{
-  top: 50% !important;
-  transform: translateY(-50%);
-}
-.v7:hover, .v8:hover{
-  transform: translateY(calc(-50% - 2px)) scale(1.02);
-}
-
-/* Facoltativo: piccoli aggiustamenti su schermi grandi */
-@media (min-width:1440px){
-  :root{ --ring-col-gap: 19vw; }
-}
-@media (min-width:1920px){
-  :root{ --ring-col-gap: 20vw; }
-}
-
-/* ===== REELS — Spacing fluido e centrato a ogni risoluzione ===== */
-.ring{
-  /* valori fluidi: si adattano da laptop a 4K */
-  --cardW:   clamp(140px, 12vw, 220px);   /* poster piccoli (file centrali) */
-  --bigW:    clamp(180px, 18vw, 320px);   /* poster laterali grandi */
-  --colGap:  clamp(140px, 18vw, 360px);   /* distanza col SX/DX dal centro */
-  --rowGap:  clamp(120px, 16vh, 260px);   /* distanza riga TOP/BOTTOM dal centro */
-  --sideK:   2.6;                         /* fattore per posizionare i laterali */
-}
-
-/* base: usiamo variabili di trasformazione per non rompere il centraggio con l'hover */
-.ring-card{
-  width: var(--cardW) !important;
-  --tx: translateX(0);
-  --ty: translateY(0);
-  transform: var(--tx) var(--ty);
-}
-.ring-card:hover{
-  transform: var(--tx) var(--ty) translateY(-2px) scale(1.02);
-}
-
-/* larghezza dei laterali grandi */
-.v7, .v8 { width: var(--bigW) !important; }
-
-/* ---------- COLONNE: centratura orizzontale perfetta ---------- */
-/* colonna centrale (sopra/sotto il titolo) */
-.v2, .v5{
-  left: 50% !important;
-  --tx: translateX(-50%);
-}
-/* colonna sinistra */
-.v1, .v4{
-  left: 50% !important;
-  --tx: translateX(calc(-50% - var(--colGap)));
-}
-/* colonna destra */
-.v3, .v6{
-  left: 50% !important;
-  --tx: translateX(calc(-50% + var(--colGap)));
-}
-
-/* ---------- RIGHE: centratura verticale perfetta ---------- */
-.v1, .v2, .v3{ top: calc(50% - var(--rowGap)) !important; } /* riga in alto */
-.v4, .v5, .v6{ top: calc(50% + var(--rowGap)) !important; } /* riga in basso */
-
-/* ---------- LATERALI GRANDI: centrati verticalmente ---------- */
-.v7, .v8{
-  top: 50% !important;
-  --ty: translateY(-50%);
-}
-/* posizionamento orizzontale dei laterali come multiplo della spaziatura centrale */
-.v7{
-  left: calc(50% - (var(--colGap) * var(--sideK))) !important;
-  --tx: translateX(-50%);
-}
-.v8{
-  left: calc(50% + (var(--colGap) * var(--sideK))) !important;
-  --tx: translateX(-50%);
-}
-
-/* micro-tuning automatico su schermi molto grandi (opzionale) */
-@media (min-width: 1440px){
-  .ring{ --sideK: 2.7; }
-}
-@media (min-width: 1920px){
-  .ring{ --sideK: 2.8; }
-}
