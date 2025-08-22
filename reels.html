@@ -106,6 +106,33 @@ body.reels .v6 {
   transform-origin: center center;     /* mantieni centraggio */
 }
 
+/* ===== Offsets personalizzati per i reel ===== */
+
+/* top row (1,2,3) spostati giù di 60px */
+body.reels .v1,
+body.reels .v2,
+body.reels .v3 {
+  transform: translateY(60px) scale(0.85);   /* mantiene il ridimensionamento del 15% */
+  transform-origin: center center;
+}
+
+/* bottom row (4,5,6) spostati su di 60px */
+body.reels .v4,
+body.reels .v5,
+body.reels .v6 {
+  transform: translateY(-60px) scale(0.85);
+  transform-origin: center center;
+}
+
+/* laterali grandi */
+body.reels .v7 {
+  transform: translateX(75px);
+}
+body.reels .v8 {
+  transform: translateX(-75px);
+}
+
+
 </style>
 
 </head>
@@ -126,8 +153,8 @@ body.reels .v6 {
       <img src="/images/reels/r1-poster.jpg" alt="Reel 01 poster" loading="lazy">
     </button>
 
-    <button class="ring-card v2" data-src="https://media.example.com/reels/r2.mp4" data-title="Showcase — 02">
-      <img src="/images/reels/r2-poster.jpg" alt="Reel 02 poster" loading="lazy">
+    <button class="ring-card v2" data-src="https://kingudanise-media.b-cdn.net/Videos/oublie.mp4" data-title="Showcase — 02">
+      <img src="https://kingudanise-media.b-cdn.net/Videos/CoverPhoto/oubliecover.png" alt="Reel 02 poster" loading="lazy">
     </button>
 
     <button class="ring-card v3" data-src="https://media.example.com/reels/r3.mp4" data-title="Showcase — 03">
@@ -148,13 +175,13 @@ body.reels .v6 {
     </button>
 
     <!-- Left (big) -->
-    <button class="ring-card v7" data-src="https://kingudanise-media.b-cdn.net/Videos/LondonCompletersmb2.mp4" data-title="Showcase — 07">
+    <button class="ring-card v7" data-src="https://kingudanise-media.b-cdn.net/Videos/london.mp4" data-title="Showcase — 07">
       <img src="https://kingudanise-media.b-cdn.net/Videos/CoverPhoto/londoncover.png" alt="Reel 07 poster" loading="lazy">
     </button>
 
     <!-- Right (big) -->
-    <button class="ring-card v8" data-src="https://media.example.com/reels/r8.mp4" data-title="Showcase — 08">
-      <img src="/images/reels/r8-poster.jpg" alt="Reel 08 poster" loading="lazy">
+    <button class="ring-card v8" data-src="https://kingudanise-media.b-cdn.net/Videos/days.mp4" data-title="Showcase — 08">
+      <img src="https://kingudanise-media.b-cdn.net/Videos/CoverPhoto/dayscover.png" alt="Reel 08 poster" loading="lazy">
     </button>
 
     <!-- Lightbox -->
