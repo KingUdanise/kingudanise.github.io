@@ -89,6 +89,44 @@
   </main>
 
   <!-- Footer invisibile (solo SEO) -->
-  <footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
+<footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
+
+<script>
+  (function(){
+    const lb = document.getElementById('lightbox');
+    const video = document.getElementById('lb-video');
+    const titleEl = document.getElementById('lb-title');
+
+    document.querySelectorAll('.card-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const src = btn.getAttribute('data-src');
+        const title = btn.getAttribute('data-title') || '';
+        titleEl.textContent = title;
+        video.src = src;
+        video.currentTime = 0;
+        lb.hidden = false;
+        video.play().catch(()=>{});
+      });
+    });
+
+    function closeLB() {
+      video.pause();
+      video.src = '';
+      lb.hidden = true;
+    }
+
+    document.querySelector('.lb-close').addEventListener('click', closeLB);
+    lb.addEventListener('click', (e) => {
+      if (e.target === lb) closeLB();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !lb.hidden) closeLB();
+    });
+  })();
+</script>
+</body>
+</html>
+
 </body>
 </html>
