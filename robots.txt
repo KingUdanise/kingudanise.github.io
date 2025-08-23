@@ -1,4 +1,4 @@
 ﻿User-agent: *
 Allow: /
-Sitemap: https://www.kingudanise.com/sitemap.xml
 
+Sitemap: https://www.kingudanise.com/sitemap.xml
