@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Recaps — KINGUDANISE</title>
+  <meta name="description" content="Event recaps — breaking culture coverage.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="recaps">
+  <a href="/index.html" class="top-link">K I N G U D A N I S E</a>
+
+  <main class="ring" aria-label="Recaps">
+    <div class="ring-core">
+      <h1 class="ring-title">R E C A P S</h1>
+    </div>
+
+    <!-- Top row -->
+    <button class="ring-card v1" data-src="https://media.example.com/recaps/r1.mp4" data-title="Recap — 01">
+      <img src="/images/recaps/r1.jpg" alt="Recap 01" loading="lazy">
+    </button>
+    <button class="ring-card v2" data-src="https://media.example.com/recaps/r2.mp4" data-title="Recap — 02">
+      <img src="/images/recaps/r2.jpg" alt="Recap 02" loading="lazy">
+    </button>
+    <button class="ring-card v3" data-src="https://media.example.com/recaps/r3.mp4" data-title="Recap — 03">
+      <img src="/images/recaps/r3.jpg" alt="Recap 03" loading="lazy">
+    </button>
+
+    <!-- Bottom row -->
+    <button class="ring-card v4" data-src="https://media.example.com/recaps/r4.mp4" data-title="Recap — 04">
+      <img src="/images/recaps/r4.jpg" alt="Recap 04" loading="lazy">
+    </button>
+    <button class="ring-card v5" data-src="https://media.example.com/recaps/r5.mp4" data-title="Recap — 05">
+      <img src="/images/recaps/r5.jpg" alt="Recap 05" loading="lazy">
+    </button>
+    <button class="ring-card v6" data-src="https://media.example.com/recaps/r6.mp4" data-title="Recap — 06">
+      <img src="/images/recaps/r6.jpg" alt="Recap 06" loading="lazy">
+    </button>
+
+    <!-- Left big -->
+    <button class="ring-card v7" data-src="https://media.example.com/recaps/r7.mp4" data-title="Recap — 07">
+      <img src="/images/recaps/r7.jpg" alt="Recap 07" loading="lazy">
+    </button>
+    <!-- Right big -->
+    <button class="ring-card v8" data-src="https://media.example.com/recaps/r8.mp4" data-title="Recap — 08">
+      <img src="/images/recaps/r8.jpg" alt="Recap 08" loading="lazy">
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lb-close" aria-label="Close">×</button>
+      <video id="lb-video" playsinline controls preload="metadata"></video>
+      <div class="lb-title" id="lb-title"></div>
+    </div>
+  </main>
+
+  <footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
+
+  <script>
+    const lb=document.getElementById('lightbox');
+    const vid=document.getElementById('lb-video');
+    const lbt=document.getElementById('lb-title');
+    document.querySelectorAll('.ring-card').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        vid.src=b.dataset.src; lbt.textContent=b.dataset.title||''; lb.hidden=false; vid.play().catch(()=>{});
+      });
+    });
+    document.querySelector('.lb-close').addEventListener('click',()=>{vid.pause();vid.src='';lb.hidden=true;});
+    lb.addEventListener('click',e=>{ if(e.target===lb){ vid.pause(); vid.src=''; lb.hidden=true; }});
+  </script>
+</body>
+</html>

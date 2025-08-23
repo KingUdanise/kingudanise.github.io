@@ -1,0 +1,218 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Reels — KINGUDANISE</title>
+  <meta name="description" content="Short, vertical edits — breaking & hip-hop.">
+  <!-- Montserrat (same as the site) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css"/>
+  <style id="reels-inline-fix">
+  /* ---- Reels: layout semplice e certo ---- */
+  :root{
+    --w: 18vw;     /* larghezza posters piccoli (v1..v6) */
+    --W: 22vw;     /* larghezza posters laterali (v7,v8) */
+    --cg: 6vw;     /* spazio tra colonne centrali */
+    --rg: 14vh;    /* distanza top/bottom dal centro */
+  }
+
+  /* 1) La ring DIVENTA una grid centrata */
+  main.ring{
+    height:100vh; width:100vw; overflow:hidden;
+    display:grid;
+    grid-template-columns: 1fr var(--w) var(--w) var(--w) 1fr;
+    grid-template-rows: 1fr auto 1fr;
+    column-gap: var(--cg);
+    row-gap: var(--rg);
+    align-items:center;
+    justify-items:center;
+  }
+
+  /* 2) Il blocco testo sta esattamente al centro (no absolute) */
+  .ring-core{
+    position:static !important;
+    transform:none !important;
+    grid-column:3; grid-row:2;
+    text-align:center; z-index:5; pointer-events:none;
+  }
+
+  /* 3) I poster sono BLOCCHI (no absolute/left/top) */
+  .ring-card{
+    display:block !important;
+    position:static !important;
+    left:auto !important; right:auto !important; top:auto !important; bottom:auto !important;
+    width:var(--w);
+    aspect-ratio: 9/16;
+    margin:0; padding:0; box-sizing:border-box;
+    border:1px solid rgba(255,255,255,.12); border-radius:10px; background:#0b0b0b; overflow:hidden;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .ring-card img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .ring-card:hover{ transform:translateY(-2px) scale(1.02); box-shadow:0 20px 50px rgba(0,0,0,.55) }
+
+  /* 4) Posizionamento simmetrico con la grid */
+  /* riga top */
+  .v1{ grid-column:2; grid-row:1; }
+  .v2{ grid-column:3; grid-row:1; }  /* sopra al titolo */
+  .v3{ grid-column:4; grid-row:1; }
+  /* riga bottom */
+  .v4{ grid-column:2; grid-row:3; }
+  .v5{ grid-column:3; grid-row:3; }  /* sotto al titolo */
+  .v6{ grid-column:4; grid-row:3; }
+
+  /* laterali grandi, centrati verticalmente */
+  .v7, .v8{
+    width:var(--W) !important;
+    grid-row:1 / 4;         /* occupa tre righe -> centro verticale */
+    align-self:center;
+  }
+  .v7{ grid-column:1; justify-self:end;  margin-right:2vw; }
+  .v8{ grid-column:5; justify-self:start; margin-left: 2vw; }
+
+  /* Mobile semplice */
+  @media (max-width:900px){
+    main.ring{
+      height:auto; padding:88px 16px 40px;
+      grid-template-columns:1fr 1fr;
+      grid-template-rows:auto;
+      column-gap:14px; row-gap:14px;
+    }
+    .ring-core{ grid-column:1/3; order:-1; pointer-events:auto; }
+    .ring-card{ width:100%; }
+    .v7, .v8{ grid-column:1/3; }
+  }
+  
+  /* ===== Adjustments requested ===== */
+
+/* 1) Nascondi descrizione */
+body.reels .ring-sub { display: none !important; }
+
+/* 2) Forza il titolo REELS su una riga */
+body.reels .ring-title {
+  white-space: nowrap;
+  letter-spacing: 0.8rem;  /* leggermente stretto se serve */
+}
+
+/* 3) Riduci box centrali (v1..v6) del 15% */
+body.reels .v1,
+body.reels .v2,
+body.reels .v3,
+body.reels .v4,
+body.reels .v5,
+body.reels .v6 {
+  transform: scale(0.85);              /* 15% più piccoli */
+  transform-origin: center center;     /* mantieni centraggio */
+}
+
+/* ===== Offsets personalizzati per i reel ===== */
+
+/* top row (1,2,3) spostati giù di 60px */
+body.reels .v1,
+body.reels .v2,
+body.reels .v3 {
+  transform: translateY(60px) scale(0.85);   /* mantiene il ridimensionamento del 15% */
+  transform-origin: center center;
+}
+
+/* bottom row (4,5,6) spostati su di 60px */
+body.reels .v4,
+body.reels .v5,
+body.reels .v6 {
+  transform: translateY(-60px) scale(0.85);
+  transform-origin: center center;
+}
+
+/* laterali grandi */
+body.reels .v7 {
+  transform: translateX(75px);
+}
+body.reels .v8 {
+  transform: translateX(-75px);
+}
+
+
+</style>
+
+</head>
+<body class="reels">
+  <!-- small brand link like other pages -->
+  <a href="/index.html" class="top-link">K I N G U D A N I S E</a>
+
+  <main class="ring">
+    <!-- center text -->
+    <div class="ring-core">
+      <h1 class="ring-title">R E E L S</h1>
+      <p class="ring-sub">Short, vertical edits — breaking & hip-hop.</p>
+    </div>
+
+    <!-- 8 videos around the text -->
+    <!-- Top row (3) -->
+    <button class="ring-card v1" data-src="https://media.example.com/reels/r1.mp4" data-title="Showcase — 01">
+      <img src="/images/reels/r1-poster.jpg" alt="Reel 01 poster" loading="lazy">
+    </button>
+
+    <button class="ring-card v2" data-src="https://kingudanise-media.b-cdn.net/Videos/oublie.mp4" data-title="Showcase — 02">
+      <img src="https://kingudanise-media.b-cdn.net/Videos/CoverPhoto/oubliecover.png" alt="Reel 02 poster" loading="lazy">
+    </button>
+
+    <button class="ring-card v3" data-src="https://media.example.com/reels/r3.mp4" data-title="Showcase — 03">
+      <img src="/images/reels/r3-poster.jpg" alt="Reel 03 poster" loading="lazy">
+    </button>
+
+    <!-- Bottom row (3) -->
+    <button class="ring-card v4" data-src="https://media.example.com/reels/r4.mp4" data-title="Showcase — 04">
+      <img src="/images/reels/r4-poster.jpg" alt="Reel 04 poster" loading="lazy">
+    </button>
+
+    <button class="ring-card v5" data-src="https://media.example.com/reels/r5.mp4" data-title="Him and I">
+      <img src="https://kingudanise-media.b-cdn.net/Videos/CoverPhoto/himandicover.png" alt="Reel 05 poster" loading="lazy">
+    </button>
+
+    <button class="ring-card v6" data-src="https://kingudanise-media.b-cdn.net/Videos/crossmy.mp4" data-title="Showcase — 06">
+      <img src="/images/reels/r6-poster.jpg" alt="Reel 06 poster" loading="lazy">
+    </button>
+
+    <!-- Left (big) -->
+    <button class="ring-card v7" data-src="https://kingudanise-media.b-cdn.net/Videos/london.mp4" data-title="London">
+      <img src="https://kingudanise-media.b-cdn.net/Videos/CoverPhoto/londoncover.png" alt="Reel 07 poster" loading="lazy">
+    </button>
+
+    <!-- Right (big) -->
+    <button class="ring-card v8" data-src="https://kingudanise-media.b-cdn.net/Videos/days.mp4" data-title="Days of my life">
+      <img src="https://kingudanise-media.b-cdn.net/Videos/CoverPhoto/dayscover.png" alt="Reel 08 poster" loading="lazy">
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lb-close" aria-label="Close">×</button>
+      <video id="lb-video" playsinline controls preload="metadata"></video>
+      <div class="lb-title" id="lb-title"></div>
+    </div>
+  </main>
+
+  <footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
+
+  <script>
+    // Minimal lightbox for the ring
+    const lb   = document.getElementById('lightbox');
+    const vid  = document.getElementById('lb-video');
+    const lbt  = document.getElementById('lb-title');
+    document.querySelectorAll('.ring-card').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        vid.src = btn.dataset.src;
+        lbt.textContent = btn.dataset.title || '';
+        lb.hidden = false;
+        vid.play().catch(()=>{});
+      });
+    });
+    document.querySelector('.lb-close').addEventListener('click', ()=>{
+      vid.pause(); vid.src=''; lb.hidden = true;
+    });
+    lb.addEventListener('click', (e)=>{
+      if(e.target === lb){ vid.pause(); vid.src=''; lb.hidden = true; }
+    });
+  </script>
+</body>
+</html>

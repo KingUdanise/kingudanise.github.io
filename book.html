@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Book — KINGUDANISE</title>
+  <meta name="description" content="Book a dance cinematography shoot with KINGUDANISE. Fast estimate, minimal form, dark style.">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css"/>
+
+  <style>
+    /* The form-specific styles from your current page kept here for brevity */
+    .form-wrap{ width:100%; max-width:760px; margin:0 auto; text-align:left;
+      background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);
+      border-radius:8px; padding:1.25rem;}
+    .grid{ display:grid; grid-template-columns:1fr; gap:1rem;}
+    @media (min-width:768px){ .grid-2{ grid-template-columns:1fr 1fr; } }
+    label{ display:block; font-size:.95rem; margin-bottom:.35rem; opacity:.85;}
+    input, select, textarea{ width:100%; color:#fff; background:#111; border:1px solid #333; border-radius:6px;
+      padding:.65rem .75rem; font-size:.98rem; outline:none; transition:border-color .2s,box-shadow .2s;}
+    input:focus, select:focus, textarea:focus{ border-color:#666; box-shadow:0 0 0 3px rgba(255,255,255,.08); }
+    .hint{ font-size:.85rem; opacity:.6; margin-top:.25rem;}
+    .toggle{ display:inline-flex; gap:.5rem; flex-wrap:wrap; justify-content:center; align-items:center;}
+    .chip{ border:1px solid #444; color:#fff; background:#111; border-radius:999px; padding:.35rem .75rem; cursor:pointer;
+      transition:all .2s ease; user-select:none;}
+    .chip[aria-pressed="true"]{ background:#fff; color:#000; border-color:#fff; }
+    .divider{ height:1px; background:rgba(255,255,255,.1); margin:1rem 0;}
+    .summary{ font-size:.95rem; } .summary p{ margin:.25rem 0; }
+    .btn, .btn-outline{ font-family:'Montserrat',sans-serif; }
+    .btn{ display:inline-block; padding:.6rem 1.1rem; border:1px solid #fff; border-radius:6px;
+      color:#000; background:#fff; font-weight:600; text-decoration:none; transition:all .25s ease;}
+    .btn:hover{ transform:translateY(-1px); }
+    .btn-outline{ display:inline-block; padding:.5rem .95rem; border:1px solid #fff; border-radius:6px; color:#fff;
+      text-decoration:none; transition:all .25s ease; background:transparent;}
+    .btn-outline:hover{ background:#fff; color:#000; }
+    .actions{ display:flex; gap:.5rem; justify-content:center; flex-wrap:wrap; margin-top:.75rem;}
+  </style>
+</head>
+<body class="book">
+  <a href="/index.html" class="top-link">K I N G U D A N I S E</a>
+
+  <main class="page has-brand">
+    <header>
+      <h1>BOOK</h1>
+      <p class="muted">Quick estimate. Minimal form. I’ll reply fast with availability & options.</p>
+    </header>
+
+    <form id="book-form" class="form-wrap">
+      <!-- Client info -->
+      <div class="grid grid-2">
+        <div><label for="nome">Name</label><input id="nome" name="nome" placeholder="Name" required></div>
+        <div><label for="cognome">Surname</label><input id="cognome" name="cognome" placeholder="Surname" required></div>
+        <div><label for="email">Email</label><input id="email" name="email" type="email" placeholder="name@example.com" required></div>
+        <div><label for="telefono">Phone</label><input id="telefono" name="telefono" type="tel" placeholder="+39 3xx xxxxxx" required></div>
+      </div>
+
+      <!-- Project -->
+      <div class="divider"></div>
+      <div>
+        <label>What do you need?</label>
+        <div class="toggle" id="tipi-toggle">
+          <button type="button" class="chip" data-value="Battle">Battle</button>
+          <button type="button" class="chip" data-value="Jam">Jam</button>
+          <button type="button" class="chip" data-value="Video Personale">Personal Video</button>
+          <button type="button" class="chip" data-value="Altro">Other</button>
+        </div>
+        <input type="hidden" id="tipi" name="tipi">
+      </div>
+
+      <div style="margin-top:.75rem;">
+        <label for="dettagli">Project details</label>
+        <textarea id="dettagli" name="dettagli" rows="5" placeholder="Tell me about the project, goals, style, references..."></textarea>
+      </div>
+
+      <!-- Estimate -->
+      <div class="divider"></div>
+      <div class="grid grid-2">
+        <div><label for="giorni">How many days?</label><input id="giorni" name="giorni" type="number" min="1" placeholder="e.g. 2" required></div>
+        <div>
+          <label for="dateFrom">When? (from / to)</label>
+          <div class="grid"><input id="dateFrom" type="date"><input id="dateTo" type="date"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:.75rem;">
+        <label for="provincia">Where will it be? (Province/Region, Country)</label>
+        <input id="provincia" name="provincia" placeholder="e.g. Barcelona, Spain" required>
+        <p id="geo-hint" class="hint"></p>
+      </div>
+
+      <div style="margin-top:.75rem;">
+        <label for="airTrain">Travel by air/train?</label>
+        <select id="airTrain">
+          <option value="no">No</option>
+          <option value="yes">Yes (we’ll handle privately)</option>
+        </select>
+      </div>
+
+      <!-- Summary -->
+      <div class="divider"></div>
+      <div class="summary" id="summary">
+        <p>Base cost: <strong>€0</strong></p>
+        <p>Travel: <strong>€0</strong></p>
+        <p style="margin-top:.4rem;">Estimated total: <strong>€0</strong></p>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="submit">Send request</button>
+        <a class="btn-outline" href="mailto:kingudanise@gmail.com?subject=Booking%20request">Email me</a>
+        <a class="btn-outline" href="https://instagram.com/kingudanise" target="_blank" rel="noopener">DM on Instagram</a>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
+
+  <script>
+    /* Same pricing/helpers from your version (trimmed for clarity) */
+    const RATE_PER_DAY=350, FUEL_EUR_PER_L=1.85, CONSUMPTION_KM_PER_L=16;
+    const ORIGIN={lat:45.54155, lon:10.2118};
+    const PROVINCES_FREE={Lombardia:["Bergamo","Brescia","Como","Cremona","Lecco","Lodi","Mantova","Milano","Monza e della Brianza","Pavia","Sondrio","Varese"],Veneto:["Belluno","Padova","Rovigo","Treviso","Venezia","Verona","Vicenza"],Trentino:["Trento","Bolzano"]};
+    const isFreeProvince=p=>!!p&&[...PROVINCES_FREE.Lombardia,...PROVINCES_FREE.Veneto,...PROVINCES_FREE.Trentino].some(x=>x.toLowerCase()===p.toLowerCase());
+    const haversineKm=(a,b)=>{const R=6371,dLat=(b.lat-a.lat)*Math.PI/180,dLon=(b.lon-a.lon)*Math.PI/180,lat1=a.lat*Math.PI/180,lat2=b.lat*Math.PI/180,sinDLat=Math.sin(dLat/2),sinDLon=Math.sin(dLon/2);const c=2*Math.asin(Math.sqrt(sinDLat*sinDLat+Math.cos(lat1)*Math.cos(lat2)*sinDLon*sinDLon));return R*c;};
+    async function geocodePlace(q){try{const res=await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&accept-language=en&q=${encodeURIComponent(q)}`,{headers:{Accept:'application/json'}});const data=await res.json();if(Array.isArray(data)&&data.length>0)return{lat:parseFloat(data[0].lat),lon:parseFloat(data[0].lon)}}catch{}return null}
+
+    const form=document.getElementById('book-form');
+    const tipiToggle=document.getElementById('tipi-toggle'), tipiHidden=document.getElementById('tipi');
+    const provinciaEl=document.getElementById('provincia'), giorniEl=document.getElementById('giorni'), airTrainEl=document.getElementById('airTrain');
+    const summaryEl=document.getElementById('summary'), geoHint=document.getElementById('geo-hint');
+    let destCoords=null, geoTimer=null;
+
+    tipiToggle.querySelectorAll('.chip').forEach(chip=>{
+      chip.setAttribute('aria-pressed','false');
+      chip.addEventListener('click',()=>{
+        const pressed=chip.getAttribute('aria-pressed')==='true';
+        if(!pressed&&(chip.dataset.value==='Battle'||chip.dataset.value==='Jam')){
+          tipiToggle.querySelectorAll('.chip').forEach(c=>{
+            if((c.dataset.value==='Battle'||c.dataset.value==='Jam')&&c!==chip) c.setAttribute('aria-pressed','false');
+          });
+        }
+        chip.setAttribute('aria-pressed',String(!pressed)); updateHiddenTipi();
+      });
+    });
+    function updateHiddenTipi(){
+      const vals=[...tipiToggle.querySelectorAll('.chip[aria-pressed="true"]')].map(c=>c.dataset.value);
+      tipiHidden.value=vals.join(', ');
+    }
+
+    async function recalc(){
+      const g=parseInt(giorniEl.value||'0',10);
+      const baseCost=Number.isFinite(g)&&g>0?g*RATE_PER_DAY:0;
+      const prov=provinciaEl.value.trim(); const useAirTrain=airTrainEl.value==='yes';
+      let travelCost=0;
+      if(!useAirTrain&&prov){
+        if(isFreeProvince(prov)){ travelCost=0; geoHint.textContent='Travel included for Lombardia / Veneto / Trentino.'; }
+        else{
+          if(!destCoords){ geoHint.textContent='Estimating distance…'; destCoords=await geocodePlace(prov); }
+          if(destCoords){
+            geoHint.textContent='Distance estimated using administrative coordinates.';
+            const km=haversineKm(ORIGIN,destCoords)*2, liters=km/CONSUMPTION_KM_PER_L;
+            travelCost=Math.max(0,Math.round(liters*FUEL_EUR_PER_L));
+          }else{ geoHint.textContent='Location not found — travel cost on request.'; }
+        }
+      }else if(useAirTrain){ geoHint.textContent='Travel by air/train — handled privately.'; }
+      else{ geoHint.textContent=''; }
+      const total=baseCost+travelCost;
+      summaryEl.innerHTML=`<p>Base cost (${Number.isFinite(g)?g:0} × €${RATE_PER_DAY}/day): <strong>€${baseCost.toLocaleString('it-IT')}</strong></p>
+        <p>Travel: <strong>€${useAirTrain?'— (air/train)':travelCost.toLocaleString('it-IT')}</strong></p>
+        <p style="margin-top:.4rem;">Estimated total: <strong>€${useAirTrain?baseCost.toLocaleString('it-IT'):total.toLocaleString('it-IT')}</strong></p>`;
+    }
+    [giorniEl,airTrainEl].forEach(el=>el.addEventListener('input',recalc));
+    provinciaEl.addEventListener('input',()=>{ clearTimeout(geoTimer); destCoords=null; geoTimer=setTimeout(recalc,500); });
+
+    form.addEventListener('submit',e=>{
+      e.preventDefault();
+      const data=new FormData(form), p=Object.fromEntries(data.entries());
+      const subject=encodeURIComponent('Booking request');
+      const body=encodeURIComponent(`Name: ${p.nome} ${p.cognome}
+Email: ${p.email}
+Phone: ${p.telefono}
+
+Type: ${p.tipi||'(not specified)'}
+Days: ${p.giorni}
+Dates: ${document.getElementById('dateFrom').value||'-'} — ${document.getElementById('dateTo').value||'-'}
+
+Location: ${p.provincia}
+Air/Train: ${airTrainEl.value}
+
+Details:
+${p.dettagli||''}`);
+      window.location.href=`mailto:kingudanise@gmail.com?subject=${subject}&body=${body}`;
+    });
+
+    recalc();
+  </script>
+</body>
+</html>

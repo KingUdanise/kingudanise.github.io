@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Cinematography — KINGUDANISE</title>
+  <meta name="description" content="Cinematography projects — reels, shorts and narrative pieces.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body class="cinematography">
+  <a href="/index.html" class="top-link">K I N G U D A N I S E</a>
+
+  <main class="ring" aria-label="Cinematography">
+    <div class="ring-core">
+      <h1 class="ring-title">C I N E M A T O G R A P H Y</h1>
+    </div>
+
+    <!-- Top row -->
+    <button class="ring-card v1" data-src="https://media.example.com/cine/c1.mp4" data-title="Cinematography — 01">
+      <img src="/images/cine/c1.jpg" alt="Cinematography 01" loading="lazy">
+    </button>
+    <button class="ring-card v2" data-src="https://media.example.com/cine/c2.mp4" data-title="Cinematography — 02">
+      <img src="/images/cine/c2.jpg" alt="Cinematography 02" loading="lazy">
+    </button>
+    <button class="ring-card v3" data-src="https://media.example.com/cine/c3.mp4" data-title="Cinematography — 03">
+      <img src="/images/cine/c3.jpg" alt="Cinematography 03" loading="lazy">
+    </button>
+
+    <!-- Bottom row -->
+    <button class="ring-card v4" data-src="https://media.example.com/cine/c4.mp4" data-title="Cinematography — 04">
+      <img src="/images/cine/c4.jpg" alt="Cinematography 04" loading="lazy">
+    </button>
+    <button class="ring-card v5" data-src="https://media.example.com/cine/c5.mp4" data-title="Cinematography — 05">
+      <img src="/images/cine/c5.jpg" alt="Cinematography 05" loading="lazy">
+    </button>
+    <button class="ring-card v6" data-src="https://media.example.com/cine/c6.mp4" data-title="Cinematography — 06">
+      <img src="/images/cine/c6.jpg" alt="Cinematography 06" loading="lazy">
+    </button>
+
+    <!-- Left big -->
+    <button class="ring-card v7" data-src="https://media.example.com/cine/c7.mp4" data-title="Cinematography — 07">
+      <img src="/images/cine/c7.jpg" alt="Cinematography 07" loading="lazy">
+    </button>
+    <!-- Right big -->
+    <button class="ring-card v8" data-src="https://media.example.com/cine/c8.mp4" data-title="Cinematography — 08">
+      <img src="/images/cine/c8.jpg" alt="Cinematography 08" loading="lazy">
+    </button>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lb-close" aria-label="Close">×</button>
+      <video id="lb-video" playsinline controls preload="metadata"></video>
+      <div class="lb-title" id="lb-title"></div>
+    </div>
+  </main>
+
+  <footer class="footer"><span>© 2025 KINGUDANISE</span></footer>
+
+  <script>
+    const lb=document.getElementById('lightbox');
+    const vid=document.getElementById('lb-video');
+    const lbt=document.getElementById('lb-title');
+    document.querySelectorAll('.ring-card').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        vid.src=b.dataset.src; lbt.textContent=b.dataset.title||''; lb.hidden=false; vid.play().catch(()=>{});
+      });
+    });
+    document.querySelector('.lb-close').addEventListener('click',()=>{vid.pause();vid.src='';lb.hidden=true;});
+    lb.addEventListener('click',e=>{ if(e.target===lb){ vid.pause(); vid.src=''; lb.hidden=true; }});
+  </script>
+</body>
+</html>
