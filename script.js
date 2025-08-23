@@ -1,4 +1,4 @@
-﻿// Lightweight lightbox for any .card-btn (data-src, data-title)
+﻿﻿// Lightweight lightbox for any .card-btn (data-src, data-title)
 (function () {
   const lb = document.getElementById('lightbox');
   if (!lb) return;
